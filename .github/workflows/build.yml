@@ -1,1 +1,5 @@
 name: JWTAuthentication Pipeline
+on:
+  push:
+    branches:
+      - main
