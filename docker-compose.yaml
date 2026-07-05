@@ -1,0 +1,29 @@
+services:
+  #  # Postgresql
+  postgres:
+    image: postgres:15
+    container_name: test_postgres_ddb1
+    environment:
+      POSTGRES_DB: local_test
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: 1234
+
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  #pg Admin
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: test_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8081:80"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
