@@ -1,5 +1,26 @@
-name: JWTAuthentication Pipeline
+name: JWT Authentication CI
 on:
   push:
     branches:
       - main
+
+jobs:
+  buil:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repositiry
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+         distributions: temurin
+         java-version: '21'
+         cache: maven
+      - name: Build Project
+        run: mvn clean package
+
+      - name: Build Project
+        run: docker build -t jwt-authentication .
+
